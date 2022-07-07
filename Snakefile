@@ -1,5 +1,5 @@
 # Pipeline to download, preprocess, cluster, and plot cells in example scRNAseq data
-# @authors: Dakota Hawkins and Emma Briars
+# @authors: Gisselle and MyMy
 
 
 # This should call the download_data.py Python script to download data.
@@ -9,6 +9,12 @@
 # produced by each rule to unique directories.
 # allowable: paul, moignard, pbmc3k
 rule download_data:
+    params:
+        dataset = lambda wc: wc.dataset
+    output:
+        adata = "{dataset}.h5ad"
+    script:
+        "script/download_data.py"
 
 # This rule should preprocess downloaded data by calling the `preprocess.py`
 # Python script.
